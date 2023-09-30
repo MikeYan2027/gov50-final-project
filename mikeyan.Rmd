@@ -11,4 +11,4 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to polling data and how accurately pre-election polls predict election results. I want to especially study the polls and elections for the 2016, 2018, 2020, and 2022 cycle.
+I am interested in exploring data related to polling data and how accurately pre-election polls predict election results. I want to especially study the polls and elections for the 2016, 2018, 2020, and 2022 cycle. Because I'm studying the accuracy of polls, studying several cycles could reinforce the strength and validity of my results. I can also compare poll accuracy for congressional elections and presidential elections. Lastly, I could apply my findings to the upcoming 2024 cycle as well. 
