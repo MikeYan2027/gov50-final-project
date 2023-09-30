@@ -1,0 +1,14 @@
+---
+title: "Gov 50 Final Project"
+author: "Mike Yan"
+description: "My final project"
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+
+## Project thoughts
+
+I am interested in exploring data related to polling data and how accurately pre-election polls predict election results. I want to especially study the polls and elections for the 2016, 2018, 2020, and 2022 cycle.
