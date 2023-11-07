@@ -16,3 +16,68 @@ I am interested in exploring data related to inflation in the American economy a
 ## Proposal
 
 Does inflation negatively impact the presidential approval ratings? In this study, I plan to examine the extent to which economic inflation/deflation in the US affects the incumbent president's job performance rating in the eyes of the American public. I hypothesize that increasing inflation would cause the approval ratings to go down, and a stable economy with low levels of inflation would correspond with a high approval rating. During periods of high inflation, I expect that prices of most products and services in the US would rise. Consumers who have the same levels of income now have to pay more for these products and services, leading them with a lower levels of saving and financial stability. This phenomenon would make consumers disillusioned in the US economy, and this financial distress would translate to political discontent with the president. As a result, I suspect that these consumers, who are also US citizens who can participate in American politics, would report a lower level of approval of the incumbent president. My sample is comprised of all the US presidents from FDR to Joe Biden. My unit of analysis is each president. The explanatory variable of interest is monthly inflation of the US economy from July 1941 to September 2023. These inflation rates are calculated using the Consumer Price Index, which is published monthly by the Bureau of Labor Statistics (BLS) of the U.S. Department of Labor. The outcome variable is the presidential approval rating. It varies from 0-100, which represents the percentage of respondents who express approval/disapproval of the president's performance. For example, if the outcome variable is 54, it means that 54% of the respondents approve the president's overall performance in the past month. The data comes from Gallup's Presidential Approval project, which conducts national polls asking about public approval of the president. The question asked to the respondents is as follows: Do you approve or disapprove of the way [enter President name] is handling his job as President? To investigate inflation's effect on approval rating, I would conduct a regression analysis to test the correlation between inflation and approval rating for each president, and take an average of all the correlation coefficients to obtain a single value. Finally, we would use the significance test to see if the correlation value is statistically significant. If it's statistically significant, then inflation does have an effect on presidential approval rating. If it's not statistically significant, then we cannot find convincing evidence that there's a correlation.
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(zoo)
+library(broom)
+```
+
+```{r}
+inflation <- read_csv("data/Gov_50_Inflation.csv")
+approval <- read_csv("data/Gov_50_Pres_Approval.csv")
+```
+```{r}
+approval |>
+  filter(President == "Trump") |>
+  ggplot(aes(x = `Start Date`, y = Approving)) +
+  geom_line(linewidth = 1.5, alpha = 0.5, color = "steelblue1")
+```
+```{r}
+inflation <- inflation |>
+  select(-Avg) |>
+  pivot_longer(
+    cols = `Jan`:`Dec`,
+    names_to = "month",
+    values_to = "inflation") |>
+  mutate(year_month = as.yearmon(paste(Year, month), "%Y %b")) |>
+  select(-Year, -month)
+``` 
+
+```{r}
+approval <- approval |>
+  mutate(year_month = as.yearmon(`Start Date`,"%Y %b")) |>
+  group_by(year_month) |>
+  mutate(monthly_approval = mean(Approving))
+approval
+```
+
+```{r}
+approval <- approval |>
+  left_join(inflation) |>
+  drop_na() |>
+  distinct(year_month, .keep_all = TRUE)
+```
+```{r}
+approval2000 <- approval |>
+  filter(year_month >= "Jan 2000")
+approval2000 |>
+  ggplot(aes(x = inflation, y = monthly_approval)) +
+  geom_point()
+```
+```{r}
+approval |>
+  ggplot() +
+  geom_line(aes(x= year_month, y = monthly_approval, color = "red")) +
+  geom_line(aes(x= year_month, y = inflation * 10, color = "steelblue"))
+```
+
+
+```{r}
+fit <- lm(monthly_approval ~ inflation, data = approval2000)
+fit
+summary(fit)
+```
+
