@@ -137,6 +137,61 @@ glance(fit_1940)
 ```
 When a regression is run on all data points from 1940 to 2023, the r squared value is 0.064. This value is much smaller than when the regression is only run for Obama's presidency. An r squared value of 0.064 suggests a very weak correlation between inflation and approval rating throughout this time period.
 
+## Regression By President (Not Finished)
+Now that we have run regressions for a single president and for all presidents combined from 1940 to 2023, it would be helpful to see the relationship between inflation and approval rating for each president.
+
+```{r}
+approval |>
+  ggplot(aes(x = inflation, y = monthly_approval)) +
+  geom_point() +
+  labs(x = "Inflation",
+       y = "Monthly Approval") +
+  facet_wrap(~President, nrow = 5)
+```
+
+
+
+
+```{r}
+regression <- function(){
+  m <- c()
+  for (x in unique(approval$President)){
+    approval_x <- approval|>
+      filter(President == x)
+    y = lm(monthly_approval ~ inflation, data = approval_x)
+    r2 = summary(y)$r.squared
+    m <- c(m, r2)
+  }
+  return(m)
+}
+regression()
+```
+
+
+
+```{r}
+president <- function(){
+  p <- c()
+  for (x in unique(approval$President)){
+    p <- c(p, x)
+  }
+  return(p)
+}
+president()
+```
+
+
+
+```{r}
+approval_presidents <- data.frame (
+  President = president(),
+  R.Squared = regression()
+)
+approval_presidents
+```
+
+
+
 
 
 
