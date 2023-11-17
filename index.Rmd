@@ -34,19 +34,11 @@ approval <- read_csv("data/Gov_50_Pres_Approval.csv")
 approval |>
   filter(President == "Trump") |>
   ggplot(aes(x = `Start Date`, y = Approving)) +
-  geom_line(linewidth = 1.5, alpha = 0.5, color = "coral2")+
+  geom_line(linewidth = 1.5, color = "coral2")+
   labs(x = "Date",
        y = "Approval Rating")
 ```
-## Inflation Example: Inflation Rate during Obama's Presidency
-```{r}
-approval |>
-  filter(President == "Obama") |>
-  ggplot(aes(x = `Start Date`, y = inflation)) +
-  geom_line(linewidth = 1.5, alpha = 0.5, color = "steelblue1")+
-  labs(x = "Date",
-       y = "Inflation")
-```
+
 
 
 ## Code for joining the Approval dataset and the Inflation dataset
@@ -66,7 +58,6 @@ approval <- approval |>
   mutate(year_month = as.yearmon(`Start Date`,"%Y %b")) |>
   group_by(year_month) |>
   mutate(monthly_approval = mean(Approving))
-approval
 ```
 
 ```{r}
@@ -75,6 +66,16 @@ approval <- approval |>
   drop_na() |>
   distinct(year_month, .keep_all = TRUE)
 ```
+## Inflation Example: Inflation Rate during Obama's Presidency
+```{r}
+approval |>
+  filter(President == "Obama") |>
+  ggplot(aes(x = `Start Date`, y = inflation)) +
+  geom_line(linewidth = 1.5, color = "steelblue1")+
+  labs(x = "Date",
+       y = "Inflation")
+```
+
 ```{r}
 approval2000 <- approval |>
   filter(year_month >= "Jan 2000")
