@@ -29,12 +29,27 @@ library(broom)
 inflation <- read_csv("data/Gov_50_Inflation.csv")
 approval <- read_csv("data/Gov_50_Pres_Approval.csv")
 ```
+## Approval Rating Example: Approval Rating during Trump's Presidency
 ```{r}
 approval |>
   filter(President == "Trump") |>
   ggplot(aes(x = `Start Date`, y = Approving)) +
-  geom_line(linewidth = 1.5, alpha = 0.5, color = "steelblue1")
+  geom_line(linewidth = 1.5, alpha = 0.5, color = "coral2")+
+  labs(x = "Date",
+       y = "Approval Rating")
 ```
+## Inflation Example: Inflation Rate during Obama's Presidency
+```{r}
+approval |>
+  filter(President == "Obama") |>
+  ggplot(aes(x = `Start Date`, y = inflation)) +
+  geom_line(linewidth = 1.5, alpha = 0.5, color = "steelblue1")+
+  labs(x = "Date",
+       y = "Inflation")
+```
+
+
+## Code for joining the Approval dataset and the Inflation dataset
 ```{r}
 inflation <- inflation |>
   select(-Avg) |>
