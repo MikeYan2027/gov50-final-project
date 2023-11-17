@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/Gov_50_Inflation.csv","data/Gov_50_Pres_Approval.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/Gov_50_Inflation.csv","data/Gov_50_Pres_Approval.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-10-1.png","index_files/figure-html5/unnamed-chunk-12-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1640,40 +1640,59 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>The graph above plots the presidential approval rating and the national inflation rate from January 1940 to October 2023. The approval rating is reflected by the scale on the y-axis and ranges from 0-100. The inflation rate does not follow the same scale; it is adjusted for better visualization and vertical comparison with the corresponding approval rating.</p>
 <p>Even though it is certain that there does not exist a causal relationship between approval rating and inflation rate, one can observe from the graph and hypothesize that these two variables exhibit an inverse correlation: on average, approval rating moves in the opposite direction of inflation.</p>
 <p>There are several spikes in the graph that may elucidate the relationship we described above. For example, in the years post-WW2 and near 1950, there was a significant spike in inflation rate. In the meantime, the president at the time, Truman, suffered a huge blow at public approval. Another spike occurred in the mid-late 1970s, when inflation rate skyrocketed. This was perhaps due to the 1970s oil embargo that had a tremendous impact on the American economy. With increasing inflation rate, the approval rating also went down dramatically. One can also observe that during the periods 1955-1968, 1992-2008, 2010-2020, the inflation rate and approval rate seem to be a vertical mirror of one another, which could also suggest an inverse correlation between these two variables.</p>
+<h2 id="regression-obama">Regression (Obama)</h2>
+<p>In order to study the relationship between inflation rate and approval rating for a specific president, we can run a regression test of monthly approval on inflation. Here, inflation is the explanatory variable, and approval rating is the outcome variable, because we want to know whether or not inflation influences approval rating.
+We will first illustrate a regression test run on Obama’s presidency.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>monthly_approval</span> <span class='op'>~</span> <span class='va'>inflation</span>, data <span class='op'>=</span> <span class='va'>approval2000</span><span class='op'>)</span></span>
-<span><span class='va'>fit</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>approval_obama</span> <span class='op'>&lt;-</span> <span class='va'>approval</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>President</span> <span class='op'>==</span> <span class='st'>"Obama"</span><span class='op'>)</span></span>
+<span><span class='va'>approval_obama</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>inflation</span>, y <span class='op'>=</span> <span class='va'>monthly_approval</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Inflation"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Monthly Approval"</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code>
-Call:
-lm(formula = monthly_approval ~ inflation, data = approval2000)
-
-Coefficients:
-(Intercept)    inflation  
-     51.247       -1.495  </code></pre>
+<p><img src="index_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>obama_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>monthly_approval</span> <span class='op'>~</span> <span class='va'>inflation</span>, data <span class='op'>=</span> <span class='va'>approval_obama</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>obama_fit</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code>
-Call:
-lm(formula = monthly_approval ~ inflation, data = approval2000)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--21.102  -6.669  -1.554   4.217  39.893 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  51.2469     1.0684   47.96  &lt; 2e-16 ***
-inflation    -1.4952     0.3429   -4.36 1.82e-05 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 10.39 on 282 degrees of freedom
-Multiple R-squared:  0.06316,   Adjusted R-squared:  0.05984 
-F-statistic: 19.01 on 1 and 282 DF,  p-value: 1.823e-05</code></pre>
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic   p.value    df logLik   AIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1     0.244         0.236  4.50      30.3   3.19e-7     1  -280.  565.
+# ℹ 4 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;,
+#   nobs &lt;int&gt;</code></pre>
 </div>
+<p>We see that the r squared value is 0.244. This means that about 24.4% of the variance in approval rating is accounted for by inflation. Since 0.244 is fairly close to 0 rather than 1, it indicates that there might be a weak (inverse) correlation between inflation and approval rating during Obama’s presidency.</p>
+<h2 id="regression-1940-2023">Regression (1940-2023)</h2>
+<p>Now, let’s run a regression of inflation on approval rating from January 1940 to October 2023. This means that we are not longer looking at the relationship between the two variables for a single president, but rather across all presidents in this time period.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>approval</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>inflation</span>, y <span class='op'>=</span> <span class='va'>monthly_approval</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Inflation"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Monthly Approval"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit_1940</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>monthly_approval</span> <span class='op'>~</span> <span class='va'>inflation</span>, data <span class='op'>=</span> <span class='va'>approval</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit_1940</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1    0.0638        0.0627  12.4      60.0 2.55e-14     1 -3478. 6963.
+# ℹ 4 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;,
+#   nobs &lt;int&gt;</code></pre>
+</div>
+<p>When a regression is run on all data points from 1940 to 2023, the r squared value is 0.064. This value is much smaller than when the regression is only run for Obama’s presidency. An r squared value of 0.064 suggests a very weak correlation between inflation and approval rating throughout this time period.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

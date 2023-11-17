@@ -98,9 +98,50 @@ Even though it is certain that there does not exist a causal relationship betwee
 
 There are several spikes in the graph that may elucidate the relationship we described above. For example, in the years post-WW2 and near 1950, there was a significant spike in inflation rate. In the meantime, the president at the time, Truman, suffered a huge blow at public approval. Another spike occurred in the mid-late 1970s, when inflation rate skyrocketed. This was perhaps due to the 1970s oil embargo that had a tremendous impact on the American economy. With increasing inflation rate, the approval rating also went down dramatically. One can also observe that during the periods 1955-1968, 1992-2008, 2010-2020, the inflation rate and approval rate seem to be a vertical mirror of one another, which could also suggest an inverse correlation between these two variables.
 
+
+## Regression (Obama)
+In order to study the relationship between inflation rate and approval rating for a specific president, we can run a regression test of monthly approval on inflation. Here, inflation is the explanatory variable, and approval rating is the outcome variable, because we want to know whether or not inflation influences approval rating.
+We will first illustrate a regression test run on Obama's presidency.
+
 ```{r}
-fit <- lm(monthly_approval ~ inflation, data = approval2000)
-fit
-summary(fit)
+approval_obama <- approval |>
+  filter(President == "Obama")
+approval_obama |>
+  ggplot(aes(x = inflation, y = monthly_approval)) +
+  geom_point() +
+  labs(x = "Inflation",
+       y = "Monthly Approval")
 ```
+
+```{r}
+obama_fit <- lm(monthly_approval ~ inflation, data = approval_obama)
+glance(obama_fit)
+```
+We see that the r squared value is 0.244. This means that about 24.4% of the variance in approval rating is accounted for by inflation. Since 0.244 is fairly close to 0 rather than 1, it indicates that there might be a weak (inverse) correlation between inflation and approval rating during Obama's presidency.
+
+## Regression (1940-2023)
+Now, let's run a regression of inflation on approval rating from January 1940 to October 2023. This means that we are not longer looking at the relationship between the two variables for a single president, but rather across all presidents in this time period.
+
+
+```{r}
+approval |>
+  ggplot(aes(x = inflation, y = monthly_approval)) +
+  geom_point() +
+  labs(x = "Inflation",
+       y = "Monthly Approval")
+```
+
+```{r}
+fit_1940 <- lm(monthly_approval ~ inflation, data = approval)
+glance(fit_1940)
+```
+When a regression is run on all data points from 1940 to 2023, the r squared value is 0.064. This value is much smaller than when the regression is only run for Obama's presidency. An r squared value of 0.064 suggests a very weak correlation between inflation and approval rating throughout this time period.
+
+
+
+
+
+
+
+
 
