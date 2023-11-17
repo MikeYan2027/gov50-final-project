@@ -41,7 +41,7 @@ approval |>
 
 
 
-## Code for joining the Approval dataset and the Inflation dataset
+## Code for Joining the Approval Dataset and the Inflation Dataset
 ```{r}
 inflation <- inflation |>
   select(-Avg) |>
@@ -83,13 +83,20 @@ approval2000 |>
   ggplot(aes(x = inflation, y = monthly_approval)) +
   geom_point()
 ```
+## Overall Trend since FDR
 ```{r}
 approval |>
   ggplot() +
-  geom_line(aes(x= year_month, y = monthly_approval, color = "red")) +
-  geom_line(aes(x= year_month, y = inflation * 10, color = "steelblue"))
+  geom_line(aes(x= year_month, y = monthly_approval, color = "Approval")) +
+  geom_line(aes(x= year_month, y = inflation * 10, color = "Inflation")) +
+  labs(x = "Date",
+       y = "Approval/Inflation")
 ```
+The graph above plots the presidential approval rating and the national inflation rate from January 1940 to October 2023. The approval rating is reflected by the scale on the y-axis and ranges from 0-100. The inflation rate does not follow the same scale; it is adjusted for better visualization and vertical comparison with the corresponding approval rating.
 
+Even though it is certain that there does not exist a causal relationship between approval rating and inflation rate, one can observe from the graph and hypothesize that these two variables exhibit an inverse correlation: on average, approval rating moves in the opposite direction of inflation.
+
+There are several spikes in the graph that may elucidate the relationship we described above. For example, in the years post-WW2 and near 1950, there was a significant spike in inflation rate. In the meantime, the president at the time, Truman, suffered a huge blow at public approval. Another spike occurred in the mid-late 1970s, when inflation rate skyrocketed. This was perhaps due to the 1970s oil embargo that had a tremendous impact on the American economy. With increasing inflation rate, the approval rating also went down dramatically. One can also observe that during the periods 1955-1968, 1992-2008, 2010-2020, the inflation rate and approval rate seem to be a vertical mirror of one another, which could also suggest an inverse correlation between these two variables.
 
 ```{r}
 fit <- lm(monthly_approval ~ inflation, data = approval2000)
