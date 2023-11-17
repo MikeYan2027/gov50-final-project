@@ -29,7 +29,7 @@ library(broom)
 inflation <- read_csv("data/Gov_50_Inflation.csv")
 approval <- read_csv("data/Gov_50_Pres_Approval.csv")
 ```
-## Approval Rating Example: Approval Rating during Trump's Presidency
+## Approval Rating Example: Approval Rating During Trump's Presidency
 ```{r}
 approval |>
   filter(President == "Trump") |>
@@ -66,7 +66,7 @@ approval <- approval |>
   drop_na() |>
   distinct(year_month, .keep_all = TRUE)
 ```
-## Inflation Example: Inflation Rate during Obama's Presidency
+## Inflation Example: Inflation Rate During Obama's Presidency
 ```{r}
 approval |>
   filter(President == "Obama") |>
@@ -83,7 +83,7 @@ approval2000 |>
   ggplot(aes(x = inflation, y = monthly_approval)) +
   geom_point()
 ```
-## Overall Trend since FDR
+## Overall Trend Since FDR
 ```{r}
 approval |>
   ggplot() +

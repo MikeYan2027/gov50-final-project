@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/Gov_50_Inflation.csv","data/Gov_50_Pres_Approval.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","mikeyan.html","mikeyan_files/anchor-4.2.2/anchor.min.js","mikeyan_files/bowser-1.9.3/bowser.min.js","mikeyan_files/distill-2.2.21/template.v2.js","mikeyan_files/figure-html5/unnamed-chunk-3-1.png","mikeyan_files/figure-html5/unnamed-chunk-7-1.png","mikeyan_files/figure-html5/unnamed-chunk-8-1.png","mikeyan_files/header-attrs-2.24/header-attrs.js","mikeyan_files/jquery-3.6.0/jquery-3.6.0.js","mikeyan_files/jquery-3.6.0/jquery-3.6.0.min.js","mikeyan_files/jquery-3.6.0/jquery-3.6.0.min.map","mikeyan_files/popper-2.6.0/popper.min.js","mikeyan_files/tippy-6.2.7/tippy-bundle.umd.min.js","mikeyan_files/tippy-6.2.7/tippy-light-border.css","mikeyan_files/tippy-6.2.7/tippy.css","mikeyan_files/tippy-6.2.7/tippy.umd.min.js","mikeyan_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/Gov_50_Inflation.csv","data/Gov_50_Pres_Approval.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1562,7 +1562,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='va'>approval</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/Gov_50_Pres_Approval.csv"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<h2 id="approval-rating-example-approval-rating-during-trumps-presidency">Approval Rating Example: Approval Rating during Trump’s Presidency</h2>
+<h2 id="approval-rating-example-approval-rating-during-trumps-presidency">Approval Rating Example: Approval Rating During Trump’s Presidency</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>approval</span> <span class='op'>|&gt;</span></span>
@@ -1574,7 +1574,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
-<h2 id="code-for-joining-the-approval-dataset-and-the-inflation-dataset">Code for joining the Approval dataset and the Inflation dataset</h2>
+<h2 id="code-for-joining-the-approval-dataset-and-the-inflation-dataset">Code for Joining the Approval Dataset and the Inflation Dataset</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>inflation</span> <span class='op'>&lt;-</span> <span class='va'>inflation</span> <span class='op'>|&gt;</span></span>
@@ -1592,26 +1592,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>approval</span> <span class='op'>&lt;-</span> <span class='va'>approval</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>year_month <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/zoo/man/yearmon.html'>as.yearmon</a></span><span class='op'>(</span><span class='va'>`Start Date`</span>,<span class='st'>"%Y %b"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>year_month</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>monthly_approval <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>Approving</span><span class='op'>)</span><span class='op'>)</span></span>
-<span><span class='va'>approval</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>monthly_approval <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>Approving</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code># A tibble: 1,890 × 10
-# Groups:   year_month [884]
-   President `Start Date` `End Date` Approving Disapproving
-   &lt;chr&gt;     &lt;date&gt;       &lt;date&gt;         &lt;dbl&gt;        &lt;dbl&gt;
- 1 Biden     2023-10-02   2023-10-23        37           59
- 2 Biden     2023-09-01   2023-09-23        41           58
- 3 Biden     2023-08-01   2023-08-23        42           53
- 4 Biden     2023-07-03   2023-07-27        40           55
- 5 Biden     2023-06-01   2023-06-22        43           54
- 6 Biden     2023-05-01   2023-05-24        39           57
- 7 Biden     2023-04-03   2023-04-25        37           59
- 8 Biden     2023-03-01   2023-03-23        40           56
- 9 Biden     2023-02-01   2023-02-23        42           54
-10 Biden     2023-01-02   2023-01-22        41           54
-# ℹ 1,880 more rows
-# ℹ 5 more variables: `Unsure/NoData` &lt;dbl&gt;, Inaug &lt;date&gt;,
-#   Days &lt;dbl&gt;, year_month &lt;yearmon&gt;, monthly_approval &lt;dbl&gt;</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1621,7 +1603,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/distinct.html'>distinct</a></span><span class='op'>(</span><span class='va'>year_month</span>, .keep_all <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<h2 id="inflation-example-inflation-rate-during-obamas-presidency">Inflation Example: Inflation Rate during Obama’s Presidency</h2>
+<h2 id="inflation-example-inflation-rate-during-obamas-presidency">Inflation Example: Inflation Rate During Obama’s Presidency</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>approval</span> <span class='op'>|&gt;</span></span>
@@ -1643,15 +1625,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
 </div>
+<h2 id="overall-trend-since-fdr">Overall Trend Since FDR</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>approval</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span> <span class='va'>year_month</span>, y <span class='op'>=</span> <span class='va'>monthly_approval</span>, color <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span> <span class='va'>year_month</span>, y <span class='op'>=</span> <span class='va'>inflation</span> <span class='op'>*</span> <span class='fl'>10</span>, color <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span> <span class='va'>year_month</span>, y <span class='op'>=</span> <span class='va'>monthly_approval</span>, color <span class='op'>=</span> <span class='st'>"Approval"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span> <span class='va'>year_month</span>, y <span class='op'>=</span> <span class='va'>inflation</span> <span class='op'>*</span> <span class='fl'>10</span>, color <span class='op'>=</span> <span class='st'>"Inflation"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Date"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Approval/Inflation"</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
 </div>
+<p>The graph above plots the presidential approval rating and the national inflation rate from January 1940 to October 2023. The approval rating is reflected by the scale on the y-axis and ranges from 0-100. The inflation rate does not follow the same scale; it is adjusted for better visualization and vertical comparison with the corresponding approval rating.</p>
+<p>Even though it is certain that there does not exist a causal relationship between approval rating and inflation rate, one can observe from the graph and hypothesize that these two variables exhibit an inverse correlation: on average, approval rating moves in the opposite direction of inflation.</p>
+<p>There are several spikes in the graph that may elucidate the relationship we described above. For example, in the years post-WW2 and near 1950, there was a significant spike in inflation rate. In the meantime, the president at the time, Truman, suffered a huge blow at public approval. Another spike occurred in the mid-late 1970s, when inflation rate skyrocketed. This was perhaps due to the 1970s oil embargo that had a tremendous impact on the American economy. With increasing inflation rate, the approval rating also went down dramatically. One can also observe that during the periods 1955-1968, 1992-2008, 2010-2020, the inflation rate and approval rate seem to be a vertical mirror of one another, which could also suggest an inverse correlation between these two variables.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>monthly_approval</span> <span class='op'>~</span> <span class='va'>inflation</span>, data <span class='op'>=</span> <span class='va'>approval2000</span><span class='op'>)</span></span>
@@ -1686,7 +1674,7 @@ Residual standard error: 10.39 on 282 degrees of freedom
 Multiple R-squared:  0.06316,   Adjusted R-squared:  0.05984 
 F-statistic: 19.01 on 1 and 282 DF,  p-value: 1.823e-05</code></pre>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
